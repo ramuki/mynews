@@ -15,17 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//PHP/Laravel 09 応用課題 3
+
 Route::get('XXX', 'AAAController@bbb');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('news/create', 'Admin\NewsController@add');
     Route::post('news/create', 'Admin\NewsController@create');
-//PHP/Laravel 09 応用課題 4
     Route::get('profile/create', 'Admin\ProfileController@add');
     Route::get('profile/edit', 'Admin\ProfileController@edit');
-//PHP/Laravel 13 応用課題 3    
-    Route::post('profile/create', 'Admin\profileController@create');
+    Route::post('profile/create', 'Admin\ProfileController@create');
+    Route::post('profile/edit', 'Admin\ProfileController@update');
+    
 });
 Auth::routes();
 
