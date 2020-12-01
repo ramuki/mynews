@@ -2,27 +2,32 @@
 
 @extends('layouts.profile')
 
-@section('title', 'Myプロフィールの新規作成')
+@section('title', 'Myプロフィールの編集')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-8 mx-auto">
-                <h2>Myプロフィール新規作成</h2>
+                <h2>Myプロフィール編集</h2>
                 <form action="{{ action('Admin\ProfileController@create') }}" method="post" enctype="multipart/form-data">
-        
+                    @if (count($errors) > 0)
+                        <ul>
+                            @foreach($errors->all() as $e)
+                                <li>{{ $e }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
                     <div class="form-group row">
                         <label class="col-md-2">氏名</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="name" value="{{ old('name') }}">
+                            <input type="text" class="form-control" name="name" value="{{ $profile_form->name}}">
                         </div>
                     </div>
-            
-            
+        
                     <div class="form-group row">
                         <label class="col-md-2">性別</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="gender" value="{{ old('gender') }}">
+                            <input type="text" class="form-control" name="gender" value="{{ $profile_form->gender}}">
                         </div>
                     </div>
         
@@ -30,14 +35,14 @@
                     <div class="form-group row">
                         <label class="col-md-2">趣味</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" name="hobby" value="{{ old('hobby') }}">
+                            <input type="text" class="form-control" name="hobby" value="{{ $profile_form->hobby}}">
                         </div>
                     </div>
             
                     <div class="form-group row">
                         <label class="col-md-2">自己紹介欄</label>
                          <div class="col-md-10">
-                            <textarea class="form-control" name="introduction" rows="20">{{ old('introduction') }}</textarea>
+                            <textarea class="form-control" name="introduction" rows="20">{{ $profile_form->introduction }}</textarea>
                         </div>
                     </div>
                       {{ csrf_field() }}
